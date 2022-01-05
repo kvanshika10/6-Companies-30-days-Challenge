@@ -1,0 +1,26 @@
+class Solution{
+  public:
+    int countSubArrayProductLessThanK(const vector<int>& a, int n, long long k) {
+        long long p=1,count=0;
+        int start=0,end=0;
+        // sliding window technique 
+        // 1st case p*a[i]<k ans+=(end-start+1)
+        // 2nd case p*a[i]>k remove the elements from left 
+        //until product is lesser than k as they have been already inclu
+        for(int i=0;i<n;i++){
+            p*=a[i];
+            end=i;
+            while(start<end&&p>=k){
+                p=p/a[start];
+                start++;
+            }
+            
+            if(p<k){
+                int curr=end-start+1;
+                count+=curr;
+            }
+        }
+       
+        return count;
+    }
+};

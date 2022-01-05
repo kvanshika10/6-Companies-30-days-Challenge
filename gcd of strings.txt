@@ -1,0 +1,31 @@
+class Solution {
+public:
+    string gcdOfStrings(string s1, string s2) {
+    if(s1<s2){
+        string temp=s1;
+        s1=s2;
+        s2=temp;
+       }
+        for(int i=s1.size()-1;i>=0;i--){
+                       string s3=s1.substr(0,i+1);
+                       string s4;
+                      
+                       while(s4.length()<s1.length()){
+                           s4+=s3;
+                       }
+                       
+                       if(s4==s1){
+                           string s5;
+                           while(s5.length()<s2.length()){
+                               s5+=s3;
+                              }
+                         // cout << s5 << " "<< s4 << " "<<s3<< endl;
+                            if(s5==s2)
+                              return s3;
+                           }
+                   }
+                       
+    
+        return "";
+    }
+};
