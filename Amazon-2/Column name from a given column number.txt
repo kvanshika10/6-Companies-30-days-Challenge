@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+
+
+class Solution{
+    public:
+    #define ll long long int 
+    string colName (long long int n)
+    {
+        long long int temp=n;
+        map<ll,char>mp;
+        int i;
+        for(i=1;i<=26;i++){
+            mp[i]=64+i;
+        }
+        // no of digits in string
+        int count=0;
+        while(n>0){
+            n=n/26;
+            count++;
+        }
+        
+      
+        ll a[count];
+        ll k=count;
+        k--;
+        while(k>0){
+            temp-=pow(26,k);
+            k--;
+        }
+    
+         i=0;
+         count--;
+      while(count>0){
+          if(i>0)
+         temp=temp-(a[i-1]-1)*pow(26,count+1);
+//cout << temp<<" "<<count<< endl;
+         a[i]=ceil(temp/pow(26,count));
+         
+         i++;
+         count--;
+      }
+      a[i]=temp%26;
+      if(a[i]==0)
+      a[i]=26;
+        
+        string s="";
+        for(auto k:a){
+            s+=mp[k];
+        }
+        
+        return s;
+    }
+};
