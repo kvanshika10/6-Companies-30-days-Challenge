@@ -1,0 +1,73 @@
+    int orangesRotting(vector<vector<int>>& grid) {
+        //approach store every orange as node
+        // push the rootten oranges in queue
+        // use map to store aadjacency list 
+        // store the pairs
+        // calculat the time
+        queue<pair<int,int>> q;
+        map<int,vector<int>>mp;
+        int n=grid.size();
+        int m=grid[0].size();
+        pair<int,int> arr[n][m];
+        int x=0,i;
+        for(i=0;i<grid.size();i++){
+              int j=0;
+            for(auto k:grid[i]){
+                arr[i][j].first=x;
+                arr[i][j].second=k;
+                j++;
+                x++;
+            }
+        }
+        bool visited[n*m+1];
+        memset(
+            visited,0,m*n+1);
+        set<int>s;
+        for(i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(arr[i][j].second==0)
+                    continue;
+                s.insert(arr[i][j].first);
+                if(i-1>=0&&arr[i-1][j].second!=0){
+                    mp[arr[i][j].first].push_back(arr[i-1][j].first);
+                }
+                if(i+1<n&&arr[i+1][j].second!=0){
+                    mp[arr[i][j].first].push_back(arr[i+1][j].first);
+                }
+                if(j+1<m&&arr[i][j+1].second!=0){
+                    mp[arr[i][j].first].push_back(arr[i][j+1].first);
+                }
+              if(j-1>=0&&arr[i][j-1].second!=0){
+                    mp[arr[i][j].first].push_back(arr[i][j-1].first);
+                }
+                if(arr[i][j].second==2){
+                    q.push({arr[i][j].first,0});
+                    visited[arr[i][j].first]=true;
+                }
+                
+
+            }
+        }
+        
+        int time=0;
+           while(!q.empty()){
+               int curr=q.front().first;
+                time=q.front().second;
+               q.pop();
+               for(auto k:mp[curr]){
+                   if(visited[k]!=true){
+                       q.push({k,time+1});
+                       visited[k]=true;
+                   }
+               }
+               
+           }
+        for(auto k:s){
+           if (visited[k]==false){
+               return -1;
+           }
+        }
+        return time;
+        
+    }
+};
