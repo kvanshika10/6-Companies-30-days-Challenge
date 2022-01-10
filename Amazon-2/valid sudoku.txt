@@ -1,0 +1,67 @@
+// Initial Template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+// User function Template for C++
+// tle
+class Solution{
+public:
+    int isValid(vector<vector<int>> board){
+        int i,j;
+        for(i=0;i<9;i++){
+            for(j=0;j<9;j++){
+        if(!isValid(board,i,j))
+             return 0;        
+            }
+        }
+        return 1;
+    }
+    
+    bool isValid(vector<vector<int>>& board,int i,int j){
+        return (row(board,i)&&column(board,j)&&box(board,i-i%3,j-j%3));
+    }
+    
+    bool row(vector<vector<int>>&board,int row){
+        int i;
+        set<int> a;
+        for(i=0;i<9;i++){
+            if(a.find(board[row][i])!=a.end())
+                return false;
+            if(board[row][i]!=0)
+                a.insert(board[row][i]);
+              
+        }
+            return true;
+        }
+    
+     bool column(vector<vector<int>>&board,int column){
+        int i;
+        set<int> a;
+        for(i=0;i<9;i++){
+            if(a.find(board[i][column])!=a.end())
+                return false;
+            if(board[i][column]!=0)
+                a.insert(board[i][column]);
+              
+        }
+            return true;
+        }
+        bool box(vector<vector<int>>&board,int startrow,int startcolumn){
+            int i,j;
+            set<int> a;
+            for(i=0;i<3;i++){
+                for(j=0;j<3;j++){
+                    if(a.find(board[i+startrow][j+startcolumn])!=a.end())
+                        return false;
+                    if(board[i+startrow][j+startcolumn]!=0)
+                        a.insert(board[i+startrow][j+startcolumn]);
+                }
+                    
+            }
+            return true;
+        }
+    
+};
+    
