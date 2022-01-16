@@ -1,0 +1,48 @@
+//Initial Template for C++
+
+#include <bits/stdc++.h>
+#include <string>
+
+using namespace std;
+
+
+ // } Driver Code Ends
+//User function Template for C++
+
+class Solution
+{
+    public:
+     map<int,vector<char>>mp; 
+    Solution(){
+   
+     mp[2]={'a','b','c'};
+       mp[3]={'d','e','f'};
+       mp[4]={'g','h','i'};
+       mp[5]={'j','k','l'};
+       mp[6]={'m','n','o'};
+       mp[7]={'p','q','r','s'};
+       mp[8]={'t','u','v'};
+       mp[9]={'w','x','y','z'};
+
+    }
+    
+    void solve(int a[],int n,int index,vector<string>&v1,string s1){
+        if(index==n){
+            v1.push_back(s1);
+        return;
+        }
+    for(int i=0;i<mp[a[index]].size();i++){
+        solve(a,n,index+1,v1,s1+mp[a[index]][i]);
+    }
+        
+    }
+    //Function to find list of all words possible by pressing given numbers.
+    vector<string> possibleWords(int a[], int N)
+    {
+        vector<string>v1;
+        string s1="";
+        solve(a,N,0,v1,s1);
+        return v1;
+       
+    }
+};

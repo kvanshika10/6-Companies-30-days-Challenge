@@ -1,0 +1,45 @@
+class Solution {
+public:
+// basically you have to see the topo sort and topo sort is done in only dag 
+// so basically you have to see if cycle is formed or not
+     bool iscycle(int i,vector<int> a[],bool*visited,bool *dfsvisited){
+      visited[i]=true;
+      dfsvisited[i]=true;
+   for(auto k:a[i]){
+     if(!visited[k]){
+        if(iscycle(k,a,visited,dfsvisited))return true;
+        }else if(dfsvisited[k]==true)return true;
+
+       }
+       dfsvisited[i]=false;
+  return false;
+
+
+}
+
+bool detectcycle(int n ,vector<int> a[]){
+   bool visited[n];
+  bool dfsvisited[n];int i;
+ memset(visited,0,n);
+    for(i=0;i<n;i++){
+      if(!visited[i]){
+    if(iscycle(i,a,visited,dfsvisited))
+      return true;
+    }
+    }
+      return false;
+
+    }
+
+
+
+	bool isPossible(int N, vector<pair<int, int> >& prerequisites) {
+	    // Code here
+	   vector<int> a[N];
+	   for(auto k:prerequisites){
+	       a[k.second].push_back(k.first);
+	       
+	   }
+      return (detectcycle(N,a)==1)?0:1;
+	}
+};

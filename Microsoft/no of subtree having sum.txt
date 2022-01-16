@@ -1,0 +1,27 @@
+int isSum(Node*root,int sum,int &count){
+   
+    
+        if(root==0)
+           return 0;
+           
+         int l=isSum(root->left,sum,count);
+        int r=isSum(root->right,sum,count);
+        int curr_sum=l+r+root->data;
+         if(curr_sum==sum)
+            count++;
+            return curr_sum;
+            
+       
+      
+}
+//Function to count number of subtrees having sum equal to given sum.
+int countSubtreesWithSumX(Node* root, int x)
+{
+    
+    
+    int count=0;
+    isSum(root,x,count);
+      return count;
+      
+	
+}

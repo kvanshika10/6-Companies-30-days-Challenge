@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+ // } Driver Code Ends
+
+
+
+class Solution
+{
+    public:
+    //Function to calculate the span of stockâ€™s price for all n days.
+    vector <int> calculateSpan(int price[], int n)
+    {
+        stack<int>s;
+        s.push(n-1);
+        int res[n];
+        // make diagram
+        // basically we have to find the continous span of smaller or equal elements
+        // so what we will do is find the next greater elements on right 
+        
+       for(int i=n-2;i>=0;i--){
+          
+         while(!s.empty()&&price[i]>price[s.top()]){
+             res[s.top()]=i;
+             s.pop();
+         }
+         s.push(i);
+       }
+       
+      while(!s.empty()){
+      res[s.top()]=-1;
+      s.pop();
+      }
+        vector<int>v1;
+        // now ans is simple diff btw curr element and its nge
+       for(int i=0;i<n;i++){
+           res[i]=i-res[i];
+           v1.push_back(res[i]);
+       }
+       return v1;
+    }
+};
+
