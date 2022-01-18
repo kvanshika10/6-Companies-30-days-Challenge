@@ -1,10 +1,10 @@
-// TLE
+
 class Solution
 {
       
     public:
       
-     bool isValid(int i,int j,int n,int m,vector<vector<int>>grid)
+     bool isValid(int i,int j,int n,int m,vector<vector<int>>&grid)
      {
          if(i<n&&i>=0&&j<m&&j>=0&&grid[i][j]==1)
            return 1;
@@ -12,7 +12,7 @@ class Solution
      }
      
      
- int bfs(vector<vector<int>>grid,int i,int j){
+ int bfs(vector<vector<int>>&grid,int i,int j){
        vector<int>dir1={-1,-1,+1,0,0,-1,+1,+1};
         vector<int>dir2={-1,0,0,-1,+1,+1,-1,+1};
         queue<pair<int,int>> q;
