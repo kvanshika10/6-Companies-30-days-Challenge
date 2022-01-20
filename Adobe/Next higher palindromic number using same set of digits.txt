@@ -1,0 +1,18 @@
+class Solution{
+  public:
+    string nextPalin(string N) { 
+        string s="";
+        int n=N.size();
+        for(int i=0;i<n/2;i++)
+              s+=N[i];
+    bool val=next_permutation(s.begin(),s.end());
+               if(val==false)
+                 return "-1";
+        string x=s;
+        reverse(x.begin(),x.end());
+        if(n%2!=0)
+          s+=N[n/2];
+            s+=x;
+        return s;
+    }
+};

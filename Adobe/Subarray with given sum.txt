@@ -1,0 +1,25 @@
+vector<int> subarraySum(int arr[], int n, long long s)
+    {
+        vector<int>v1;
+        int l=0,r=0,sum=0;
+        // we will start adding no;
+          while(r<n){
+              
+              if(sum+arr[r]==s){
+                  v1={l+1,r+1};
+                  break;
+              }else if(sum+arr[r]<s){
+                  sum+=arr[r];
+                  r++;
+              }else {
+                  sum-=arr[l];
+                  l++; // coz u want a continous subarray
+              }
+          }
+          if(v1.size()==0){
+              v1.push_back(-1);// if there is no sum found
+          }
+          
+          return v1;
+    }
+};

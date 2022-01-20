@@ -1,0 +1,31 @@
+class Solution {
+public:
+ 
+ int solve(vector<int>A,int start,int end,vector<vector<int>>&dp){
+     if(start>end)    // if(n==0)
+         return dp[start][end]=0;
+     
+     if(start==end)
+         return dp[start][end]=A[start]; //if(n==1)
+     
+     if(dp[start][end]!=-1)
+       return dp[start][end];
+       
+     int ans1=A[start]+min(solve(A,start+1,end-1,dp),solve(A,start+2,end,dp));
+           // if x chooses A[start],then he can chose either start+1||end 
+           //if he chose start+1 then he is left with start+2...end
+           // if he choose end,then he is left with start+1........end-1;
+     int ans2=A[end]+min(solve(A,start+1,end-1,dp),solve(A,start,end-2,dp));
+     
+     return dp[start][end]=max(ans1,ans2);
+     
+ }
+
+
+    int maxCoins(vector<int>&A,int n)
+    {
+	  vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+	   return solve(A,0,n-1,dp);
+	   // tc-O(n^2) // sc-O(n^2)
+    }
+};

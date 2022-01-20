@@ -1,0 +1,19 @@
+vector<string> winner(string arr[],int n)
+    {
+        
+        map<string,int>mp;
+          for(int i=0;i<n;i++){
+              mp[arr[i]]++;
+          }
+          int max_one=0;
+          string s2;
+          for(auto k:mp){
+              if(k.second>max_one){
+                 s2=k.first;
+                max_one=k.second;
+              }
+          }
+          
+          return {s2,to_string(max_one)};
+    }
+};

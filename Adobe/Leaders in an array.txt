@@ -1,0 +1,16 @@
+class Solution{
+    //Function to find the leaders in the array.
+    public:
+    vector<int> leaders(int a[], int n){
+        vector<int>v1;
+        v1.push_back(a[n-1]);
+// see from prev element
+        for(int i=n-2;i>=0;i--){
+            if(a[i]>=v1.back())
+            v1.push_back(a[i]);
+           }
+           reverse(v1.begin(),v1.end());
+        return v1;
+        
+    }
+};
