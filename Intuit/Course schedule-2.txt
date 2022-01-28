@@ -1,0 +1,53 @@
+ vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+         // here we use topo sort khans algo instead of simple dfs because we are not sure 
+        // if graph is dag or not
+        set<int>s;
+        int V=numCourses;
+      vector<int>a[V];
+        for(int i=0;i<prerequisites.size();i++){
+                int u=prerequisites[i][0];
+                int v=prerequisites[i][1];
+              a[v].push_back(u);
+            s.insert(u);
+            s.insert(v);
+         }
+
+     map<int,int> mp;// to calculate indegree
+        for(auto k:s){
+            mp[k]=0;
+        }
+        
+     for(int i=0;i<V;i++){
+        for(auto k:a[i]){
+            mp[k]++;
+        }
+     }
+     queue<int>q;
+     for(int i=0;i<V;i++){
+        if(mp[i]==0)
+            q.push(i);
+     }
+     int cnt=0;
+       vector<int> ans;
+     while(!q.empty()){
+           int curr=q.front();
+           q.pop();
+           ans.push_back(curr);      
+           for(int i=0;i<a[curr].size();i++){
+               mp[a[curr][i]]--;
+
+               if(mp[a[curr][i]]==0)
+                  q.push(a[curr][i]);
+
+           }
+        cnt++;
+        }
+     if(cnt!=V)
+       ans.clear();
+     
+        return ans;
+     
+    }
+        
+    
+};

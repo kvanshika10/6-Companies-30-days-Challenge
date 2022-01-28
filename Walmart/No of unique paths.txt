@@ -1,0 +1,69 @@
+// see the most optimized soln
+class Solution
+{
+    public:
+    //Function to find the largest number after k swaps.
+    // initial approach 
+    // finding the max among the i+1 to n and swap it with s[i];
+     // what was the problem ? and why i have to use backtracking 
+     // example take example 612399 k=2; 993216 or 993261? which 9 to swap with i 
+     // thats why we have to swap every greater number
+     
+       void solve(string str,int k,string& max){
+           
+           if(k==0)
+           return;
+           
+        int n=str.size();
+     
+       for(int i=0;i<n-1;i++){
+           for(int j=i+1;j<n;j++){
+               
+               if(str[j]>str[i]){
+                 swap(str[i],str[j]);
+               if (str.compare(max) > 0)
+                    max = str;
+ 
+                // recurse of the other k - 1 swaps
+                solve(str, k - 1,max);
+ 
+                // Backtrack
+                swap(str[j], str[i]);
+               }
+       
+        }
+           
+           }
+           
+           
+       }
+     
+      
+    string findMaximumNum(string str, int k)
+    {
+        
+       string max=str;
+       solve(str,k,max);
+      
+       return max;
+       
+    }
+};
+
+// { Driver Code Starts.
+
+int main()
+{
+    int t, k;
+    string str;
+
+    cin >> t;
+    while (t--)
+    {
+        cin >> k >> str;
+        Solution ob;
+        cout<< ob.findMaximumNum(str, k) << endl;
+    }
+    return 0;
+}
+  // } Driver Code Ends

@@ -1,0 +1,39 @@
+class Solution {
+  public:
+  
+  int toSum(Node *node){
+       if(node==0)
+       return 0;
+       int left=toSum(node->left);
+       int right=toSum(node->right);
+       int sum=left+right+node->data;
+       node->data=sum-node->data;
+       return sum;
+  }
+    // Convert a given tree to a tree where every node contains sum of values of
+    // nodes in left and right subtrees in the original tree
+    void toSumTree(Node *node)
+    {
+         toSum(node);
+    }
+};
+
+// { Driver Code Starts.
+
+int main()
+{
+
+    int t;
+	scanf("%d ",&t);
+    while(t--)
+    {
+        string s;
+		getline(cin,s);
+        Node* root = buildTree(s);
+        Solution ob;
+        ob.toSumTree(root);
+        inorder(root);
+        cout<<endl;
+    }
+    return 1;
+}  /

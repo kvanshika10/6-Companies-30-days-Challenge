@@ -1,0 +1,48 @@
+ void dfs(int s,vector<int> a[],bool *visited){
+         visited[s]=true;
+        for(auto k:a[s]){
+            if(visited[k]==false)
+                dfs(k,a,visited);
+        }
+        
+    }
+    
+    
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        // some clean code
+        int n=isConnected.size();
+        
+        //basically you have to find the no of connected components
+        // you are given an adjacency matrix
+        // removing all the self loop
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(i==j)
+                isConnected[i][j]=0;
+                }
+             }
+        vector<int>adj[n];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(isConnected[i][j]==1){
+                    adj[i].push_back(j);
+                }
+            }
+        }
+        
+        
+         bool visited[n];
+        memset(visited,0,n);
+        int count=0;
+        for(int i=0;i<n;i++){
+            if(visited[i]==false){
+                count++;
+                dfs(i,adj,visited);
+            }
+        }
+        return count;
+        
+        
+        
+    }
+};

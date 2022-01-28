@@ -1,0 +1,38 @@
+class Solution {
+public:
+    string kthLargestNumber(vector<string>& nums, int k) {
+        int maxi;
+        for(auto x:nums){
+            int n=x.size();
+            if(n>maxi)
+            maxi=n;
+        }
+      
+        vector<string>v1[maxi];
+        for(auto x:nums){
+             int n=x.size();
+            n--;
+            v1[n].push_back(x);
+        }
+        string ans;
+        
+        vector<string>v2;
+        for(int i=0;i<maxi;i++){
+            sort(v1[i].begin(),v1[i].end());
+            for(int j=0;j<v1[i].size();j++){
+                 v2.push_back(v1[i][j]);
+                 }
+            }
+          
+            int i=v2.size()-1;
+        while(k--){
+            ans=v2[i];
+            i--;
+        }
+            
+        
+    
+        return ans;
+        
+    }
+};
