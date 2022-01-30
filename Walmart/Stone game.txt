@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int helper(int l,int r ,vector<vector<int>>&dp,vector<int>&piles){
+        
+        if(l==r-1)
+            return max(piles[l],piles[r]);
+        if(dp[l][r]!=-1)
+              return dp[l][r];
+         if(dp[l][r] != -1) return dp[l][r];
+        
+        int left = piles[l] + max(helper(l+2, r,dp, piles), helper(l+1, r-1, dp,piles));
+        int right = piles[r] + max(helper(l+1, r-1,dp, piles), helper(l, r-2,dp, piles));
+        return dp[l][r]= max(left,right);
+        
+    }
+    
+    
+    bool stoneGame(vector<int>& piles) {
+        
+        // why alice will always be a winner
+        // first of all there will be no tie coz pile length is even and sum is odd
+        // secondly Alice will play optimally by always picking an odd indexes or an even indexes 
+        // sum is odd 
+        // oddsum=even + odd
+        // now sum of odd indexes>sum of even indexes || sum of even indexes > sum of odd indexes
+        // so alice will pick accordingly
+    // return 1 // one liner soln 
+        
+        
+        // dp soln
+        // explanation of recursive in dsa grp
+        int n=piles.size();
+     vector <vector<int>> dp(n,vector<int>(n,-1));
+         int alex = helper(0, n-1,dp, piles);
+        int sum = 0;
+        for(int i=0;i<piles.size();i++) sum += piles[i];
+
+        return alex > (sum - alex);
+    }
+};

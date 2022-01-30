@@ -1,0 +1,17 @@
+ bool winnerOfGame(string colors) {
+        int x=0,y=0;
+        
+        for(int i=1;i<colors.size()-1;i++){
+            if(colors[i]=='A'&&colors[i-1]=='A'&&colors[i+1]=='A')
+                  x++;
+            else if(colors[i]=='B'&&colors[i-1]=='B'&&colors[i+1]=='B')
+                   y++;
+        }
+        if(x==0)
+            return 0;
+        if(x>y){
+            return true;
+        }
+        return 0;
+    }
+};
