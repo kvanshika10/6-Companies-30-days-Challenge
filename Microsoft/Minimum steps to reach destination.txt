@@ -1,0 +1,24 @@
+class Solution{
+public:
+// if we talk of the case d>0
+// in ns teps a person will reach at n*(n+1)/2.
+// case1- the person will reach by taking n steps 
+// case 2 destination is not a summation of 1 to n so a person has to take some/any ith step backward
+// previously sum =1+2+...i..+n
+// now sum'=(1+2+..i+....+n)-i-i
+// one i is subtracted because we have added one i in the sum 2nd is subtracted because we are taking ith step backward
+// now if sum'==target
+// sum'=sum-2i => target=sum-2i =>sum-target=2i =>(sum-target)%2==0
+    int minSteps(int D){
+       int sum=0,i=0;
+       D=abs(D);
+    while(sum<D||(sum-D)%2!=0)
+    {
+        
+        i++;
+      sum+=i;
+    }
+    
+    return i;
+    }
+};
