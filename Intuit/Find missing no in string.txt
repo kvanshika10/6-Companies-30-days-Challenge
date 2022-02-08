@@ -1,0 +1,41 @@
+int missingNumber(const string& str)
+{
+    int n=str.size();int ans=-1,final_ans=-1;
+    for(int l=1;l<=6;l++){
+        bool flag=0;// for checking of invalid seq;
+        string temp=str.substr(0,l);
+        int num=stoi(temp);
+        int prev=num;
+        
+        for(int j=l;j<n;j+=l){
+            if(prev==9||prev==99||prev==999||prev==9999||prev==99999)
+            l++;
+            
+            temp=str.substr(j,l);
+            
+            
+           // if(l==3)
+            
+            if(stoi(temp)==prev+1){
+               prev=stoi(temp);
+              }else if(stoi(temp)==prev+2){
+                  ans=prev+1;
+                  prev=stoi(temp);
+              }else{
+                  flag=1;
+                  
+                  break;
+              }
+        }
+            
+           
+            if(ans!=-1&&flag==1)// if u have missing no but the sequence is invalid
+              ans=-1;
+            if(ans!=-1)
+        final_ans=ans;
+        ans=-1;
+        }
+        
+        
+       return final_ans;
+}

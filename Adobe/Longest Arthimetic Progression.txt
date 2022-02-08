@@ -1,0 +1,23 @@
+class Solution{   
+public:
+    int lengthOfLongestAP(int A[], int n) {
+        // if there are j elements length of  ap having common diffrence d
+        // now we take 1 to n elements (no pt of taking 0 elements or 1 element because we cant obtain diffrence)
+        // dp[j][d]=>length of largest ap with j+1 elements having common diffrence d
+        // tc=>O(N*N) sc=>O(N*1e4)
+        if(n==1)return 1;
+        int i,j;
+        int ans=0;
+      vector<vector<int>>dp(n,vector<int>(10000,0));
+     
+        for(int i=0;i<n-1;i++){
+             for(int j=i+1;j<n;j++){
+            int d=A[j]-A[i];
+            dp[j][d]=max(dp[i][d]+1,2);// see the value for i elements having cd d add1 to it or take only two elements
+            ans=max(ans,dp[j][d]);
+             }
+        }
+    
+    return ans;
+    }
+};

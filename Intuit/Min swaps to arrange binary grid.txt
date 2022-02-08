@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int minSwaps(vector<vector<int>>& grid) {
+        // sub problem -given an array find the min swaps in order to sort in desc order
+        //for 1st row last n-1 elements should be 0\
+         // for 2nd row n-2 
+        // so on ... upto 0
+        // prob reduces to swap adjacent elements in order to sort
+        int n=grid.size();
+        vector<int>v1;
+        for(int i=0;i<n;i++){
+            int count=0;
+            for(int j=n-1;j>=0&&grid[i][j]==0;j--){
+                count++;
+            }
+            v1.push_back(count);
+            
+        }
+        
+        int ans=0;
+        for(int i=0;i<n-1;i++){
+            if(v1[i]<n-1-i){
+                int j=i+1;
+                while(j<n){
+                    if(v1[j]>=n-1-i)
+                        break;
+                    j++;
+                }
+                if(j==n)
+                    return -1;
+                while(j>i){
+                    swap(v1[j],v1[j-1]);
+                    j--;
+                    ans++;
+                }
+                
+            }
+        }
+        
+        return ans;
+    }
+};

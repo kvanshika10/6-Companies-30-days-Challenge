@@ -1,0 +1,22 @@
+ int n=points.size(),count=0;
+        map<int,int>mp;
+         for(int i=0;i<n;i++){
+             for(int j=0;j<n;j++){
+                 if(i==j)
+                     continue;
+                   int dy=points[j][1]-points[i][1];
+                     int dx=points[j][0]-points[i][0];
+                 int d=dx*dx+dy*dy;
+                 mp[d]++;
+             }
+            for(auto k:mp)
+                count+=(k.second)*(k.second-1);//nc2*2=> total n you have to select 2 pairs and you can do permutation for those 2 // 3rd element i is fixed
+            mp.clear();
+         }
+        
+        
+        
+        
+        return count;
+    }
+};

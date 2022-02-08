@@ -1,10 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-
- // } Driver Code Ends
-
-
 class Solution
 {
     public:
@@ -17,7 +10,7 @@ class Solution
      
        void solve(string str,int k,string& max,int curr){
            
-           if(k==0)
+           if(k==0||curr==str.size())
            return;
            
         int n=str.size();
@@ -61,3 +54,21 @@ class Solution
        
     }
 };
+
+// { Driver Code Starts.
+
+int main()
+{
+    int t, k;
+    string str;
+
+    cin >> t;
+    while (t--)
+    {
+        cin >> k >> str;
+        Solution ob;
+        cout<< ob.findMaximumNum(str, k) << endl;
+    }
+    return 0;
+}
+  // } Driver Code Ends

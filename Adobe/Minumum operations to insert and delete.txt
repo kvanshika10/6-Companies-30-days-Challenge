@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+ // } Driver Code Ends
+//User function Template for C++
+
+class Solution {
+  public:
+    int minInsAndDel(int A[], int B[], int n, int m) {
+       int dp[n+1][m+1],i,j;
+        for(i=0;i<=n;i++){
+            for(j=0;j<=m;j++){
+                if(i==0||j==0)
+                 dp[i][j]=0;// if one is a empty array
+            }
+        }
+    
+        for(i=1;i<=n;i++){
+            for(j=1;j<=m;j++){
+                if(A[i-1]==B[j-1])
+                dp[i][j]=1+dp[i-1][j-1];
+                else dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+            }
+        }
+        
+       int ans=max(n,m)-dp[n][m];
+       ans+=(min(n,m)-dp[n][m]);
+         return ans;
+    }
+};

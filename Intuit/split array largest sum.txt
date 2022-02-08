@@ -1,0 +1,43 @@
+    long long fun(long long m,vector<int> nums,int id,vector<long long > sar,vector<vector<int> > dp){
+        
+        if(id==nums.size()) return INT_MAX;
+        if(dp[id][m]!=-1) return dp[id][m];
+        if(m==1) return sar[id];
+        if(id==nums.size()-1) return nums[id];
+        long long ma=INT_MAX,su=0;
+        for(int i=id;i<nums.size();i++){
+            su+=nums[i];
+            ma=min(ma,max(su,fun(m-1,nums,i+1,sar,dp)));
+        }
+        return dp[id][m]=ma;
+    }
+    int splitArray(vector<int>& nums, int m) {
+        int n=nums.size();
+        vector<long long> sua(nums.size()+1);
+        sua[n-1]=nums[n-1];
+        for(int i=n-2;i>=0;i--){
+            sua[i]=nums[i]+sua[i+1];
+        }
+        vector<vector<long long > > dp(n+1,vector<long long >(m+1,-1));
+        for(int i=1;i<=m;i++){
+            dp[n-1][i]=nums[n-1];
+        }
+        for(int i=1;i<=m;i++){
+            dp[n][i]=INT_MAX;
+        }
+        for(int i=0;i<n;i++){
+            dp[i][1]=sua[i];
+        }
+        for(int i=n-2;i>=0;i--){
+            for(int k=2;k<=m;k++){
+                long long ma=INT_MAX,su=0;
+                for(int j=i;j<n;j++){
+                    su+=nums[j];
+                    ma=min(ma,max(su,dp[j+1][k-1]));
+                }
+                dp[i][k]=ma;
+            }
+        }
+        return dp[0][m];
+    }
+};
